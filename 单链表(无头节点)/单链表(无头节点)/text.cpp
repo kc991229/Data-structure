@@ -3,6 +3,7 @@
 void text1()
 {
 	PlistNode* head = NULL;
+	PlistNode* cur = NULL;
 	PushBack(&head, 1);
 	PushBack(&head, 2);
 	PushBack(&head, 3);
@@ -12,6 +13,12 @@ void text1()
 	PopBack(&head);
 	Print(head);
 	PushFront(&head, 0);
+	Print(head);
+	cur = ListFind(head, 4);
+	Print(cur);
+	ListInsertAfter(&cur, 100);
+	Print(head);
+	SListEraseAfter(&cur);
 	Print(head);
 }
 void text2()
@@ -32,6 +39,6 @@ void text2()
 int main()
 {
 	text1();
-	text2();
+	//text2();
 	return 0;
 }

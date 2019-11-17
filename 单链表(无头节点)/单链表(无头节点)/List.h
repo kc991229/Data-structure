@@ -16,11 +16,9 @@ void PushBack(PlistNode** pplist, DateType x);
 void PopBack(PlistNode** pplist);
 void PushFront(PlistNode** pplist, DateType x);
 void PopFront(PlistNode** pplist);
-//SListNode*SListFind(SList*plist, SLTDataTypex);
-////在pos的后面进行插入 
-//voidSListInsertAfter(SListNode*pos, SLTDataTypex);//在pos的前面进行插入 
-//voidSListEraseAfter(SListNode*pos);
-//voidSListRemove(SList*plist, SLTDataTypex);
+PlistNode* ListFind(PlistNode* plist, DateType x);
+void ListInsertAfter(PlistNode** pos, DateType x);
+void SListEraseAfter(PlistNode** pos);
 void Print(PlistNode* plist);
 
 #endif
