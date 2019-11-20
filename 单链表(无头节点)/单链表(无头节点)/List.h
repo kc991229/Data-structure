@@ -20,5 +20,6 @@ PlistNode* ListFind(PlistNode* plist, DateType x);
 void ListInsertAfter(PlistNode** pos, DateType x);
 void SListEraseAfter(PlistNode** pos);
 void Print(PlistNode* plist);
+PlistNode* removeElements(PlistNode** head, int val);
 
 #endif

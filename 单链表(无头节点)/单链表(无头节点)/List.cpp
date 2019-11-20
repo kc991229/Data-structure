@@ -164,3 +164,33 @@ void Print(PlistNode* plist)
 	}
 	printf("\n");
 }
+PlistNode* removeElements(PlistNode** head, int val)
+{
+	PlistNode* cur = *head;
+	PlistNode* tmp = NULL;
+	PlistNode* newhead = *head;
+	while (cur != NULL)
+	{
+		if (cur->_date != val)
+		{
+			tmp = cur;
+			cur = cur->_next;
+		}
+		else
+		{
+			if (tmp == NULL)
+			{
+				newhead = cur->_next;
+				free(cur);
+				cur = newhead;
+			}
+			else
+			{
+				tmp->_next = cur->_next;
+				free(cur);
+				cur = tmp->_next;
+			}
+		}
+	}
+	return newhead;
+}

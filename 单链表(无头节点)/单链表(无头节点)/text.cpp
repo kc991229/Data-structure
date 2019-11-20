@@ -36,9 +36,23 @@ void text2()
 	Print(head1);
 
 }
+void text3()
+{
+	PlistNode* head = NULL;
+	PlistNode* cur = NULL;
+	PushBack(&head, 1);
+	PushBack(&head, 2);
+	PushBack(&head, 3);
+	PushBack(&head, 1);
+	PushBack(&head, 5);
+	Print(head);
+	cur=removeElements(&head, 1);
+	Print(cur);
+}
 int main()
 {
-	text1();
+	//text1();
 	//text2();
+	text3();
 	return 0;
 }
