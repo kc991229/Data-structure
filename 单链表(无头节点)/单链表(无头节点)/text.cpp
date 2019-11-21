@@ -40,14 +40,25 @@ void text3()
 {
 	PlistNode* head = NULL;
 	PlistNode* cur = NULL;
+	int num = 0;
 	PushBack(&head, 1);
 	PushBack(&head, 2);
 	PushBack(&head, 3);
+	PushBack(&head, 4);
+	PushBack(&head, 3);
+	PushBack(&head, 2);
 	PushBack(&head, 1);
-	PushBack(&head, 5);
-	Print(head);
-	cur=removeElements(&head, 1);
-	Print(cur);
+	//Print(head);
+	//cur = removeElements(&head, 1);
+	//Print(cur);
+	//cur = reverseList1(&head);
+	//Print(cur);
+	//cur = middleNode(&head);
+	//Print(cur);
+	//cur  = FindKNode(&head, 4);
+	//Print(cur);
+	num = ChkPalindrome1(head);
+	printf("%d", num);
 }
 int main()
 {

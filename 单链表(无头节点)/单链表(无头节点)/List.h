@@ -20,6 +20,13 @@ PlistNode* ListFind(PlistNode* plist, DateType x);
 void ListInsertAfter(PlistNode** pos, DateType x);
 void SListEraseAfter(PlistNode** pos);
 void Print(PlistNode* plist);
+
 PlistNode* removeElements(PlistNode** head, int val);
+PlistNode* reverseList(PlistNode** head);
+PlistNode* reverseList1(PlistNode** head);
+PlistNode* middleNode(PlistNode** head);
+PlistNode* FindKNode(PlistNode** head, int k);
+int ChkPalindrome(PlistNode* head);
+int ChkPalindrome1(PlistNode* head);
 
 #endif
