@@ -60,10 +60,28 @@ void text3()
 	num = ChkPalindrome1(head);
 	printf("%d", num);
 }
+void text4()
+{
+	PlistNode* head = NULL;
+	PlistNode* cur = NULL;
+	PlistNode* newhead = NULL;
+	/*PushBack(&head, 1);
+	PushBack(&head, 2);
+	PushBack(&head, 3);
+	PushBack(&head, 4);
+	PushBack(&head, 5);
+	PushBack(&cur, 1);
+	PushBack(&cur, 3);
+	PushBack(&cur, 5);
+	PushBack(&cur, 7);*/
+	newhead = mergeTwoLists(&head, &cur);
+	Print(newhead);
+}
 int main()
 {
 	//text1();
 	//text2();
-	text3();
+	//text3();
+	text4();
 	return 0;
 }

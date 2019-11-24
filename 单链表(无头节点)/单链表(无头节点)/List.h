@@ -28,5 +28,5 @@ PlistNode* middleNode(PlistNode** head);
 PlistNode* FindKNode(PlistNode** head, int k);
 int ChkPalindrome(PlistNode* head);
 int ChkPalindrome1(PlistNode* head);
-
+PlistNode* mergeTwoLists(PlistNode** l1, PlistNode** l2);
 #endif

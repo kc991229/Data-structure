@@ -80,7 +80,7 @@ void PushFront(PlistNode** pplist, DateType x)
 	}
 }
 /*
-函数功能：头插法
+函数功能：头删法
 入口参数：某链表的头的地址
 返回值：无
 */
@@ -339,4 +339,54 @@ int ChkPalindrome1(PlistNode* head)
 		n1 = n1->_next;
 	}
 	return 1;
+}
+PlistNode* mergeTwoLists(PlistNode** l1, PlistNode** l2)
+{
+	if (*l1 == NULL&&*l2 != NULL)
+		return *l2;
+	if (*l1 != NULL&&*l2 == NULL)
+		return *l1;
+	if (*l1 == NULL&&*l2 == NULL)
+		return NULL;
+	PlistNode* n1 = *l1;
+	PlistNode* n2 = *l2;
+	PlistNode* n3 = NULL;
+	PlistNode* cur = NULL;
+	PlistNode* head = NULL;
+	if (n1->_date >= n2->_date)
+	{
+		PlistNode* cur = (PlistNode*)malloc(sizeof(PlistNode));
+		cur->_date = n2->_date;
+		cur->_next = n1;
+		n2 = n2->_next;
+		n1 = cur;
+		n3 = n1;
+		n1 = n1->_next;
+	}
+	else
+	{
+		n3 = n1;
+		n1 = n1->_next;
+	}
+	head = n3;
+	while ((n1 != NULL) && (n2 != NULL))
+	{
+		if ((n2->_date >= n3->_date) && (n2->_date <= n1->_date))
+		{
+			cur = n2->_next;
+			n3->_next = n2;
+			n2->_next = n1;
+			n2 = cur;
+			n3 = n3->_next;
+		}
+		else{
+			n3 = n1;
+			n1 = n1->_next;
+		}
+	}
+	if (n2 != NULL)
+	{
+		n3->_next = n2;
+	}
+	return head;
 }
