@@ -12,7 +12,7 @@ void SeqListInit(SeqList* s1,size_t capacity)
 	s1->size = 0;
 }
 
-/*
+/*  
 函数功能：清除函数
 入口参数：结构体指针
 返回值：无
