@@ -44,11 +44,11 @@ void text3()
 	PushBack(&head, 1);
 	PushBack(&head, 2);
 	PushBack(&head, 3);
-	PushBack(&head, 4);
-	PushBack(&head, 3);
-	PushBack(&head, 2);
-	PushBack(&head, 1);
-	//Print(head);
+	//PushBack(&head, 4);
+	//PushBack(&head, 3);
+	//PushBack(&head, 2);
+	//PushBack(&head, 1);
+	Print(head);
 	//cur = removeElements(&head, 1);
 	//Print(cur);
 	//cur = reverseList1(&head);
@@ -57,7 +57,7 @@ void text3()
 	//Print(cur);
 	//cur  = FindKNode(&head, 4);
 	//Print(cur);
-	num = ChkPalindrome1(head);
+	num = ChkPalindrome(head);
 	printf("%d", num);
 }
 void text4()
@@ -65,16 +65,20 @@ void text4()
 	PlistNode* head = NULL;
 	PlistNode* cur = NULL;
 	PlistNode* newhead = NULL;
-	/*PushBack(&head, 1);
-	PushBack(&head, 2);
+	PushBack(&head, 1);
 	PushBack(&head, 3);
-	PushBack(&head, 4);
-	PushBack(&head, 5);
-	PushBack(&cur, 1);
-	PushBack(&cur, 3);
-	PushBack(&cur, 5);
-	PushBack(&cur, 7);*/
-	newhead = mergeTwoLists(&head, &cur);
+	PushBack(&head, 3);
+	//PushBack(&head, 4);
+	//PushBack(&head, 5);
+	//PushBack(&head, 5);
+	//PushBack(&head, 6);
+	//PushBack(&head, 6);
+	//PushBack(&head, 8);
+	//PushBack(&head, 10);
+	//PushBack(&head, 10);
+
+	//newhead=mergeTwoLists(&head, &cur);
+	newhead = deleteDuplication(head);
 	Print(newhead);
 }
 int main()
@@ -82,6 +86,6 @@ int main()
 	//text1();
 	//text2();
 	//text3();
-	text4();
+	text3();
 	return 0;
 }

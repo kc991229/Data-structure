@@ -283,12 +283,30 @@ PlistNode* FindKNode(PlistNode** head, int k)
 	}
 	return slow;
 }
-
+/*
+函数功能：判断链表是否为回文结构
+入口参数：某链表的头的地址
+返回值：1或0
+*/
 int ChkPalindrome(PlistNode* head)
 {
+	if (head == NULL)
+	{
+		return 1;
+	}
+	if (head->_next == NULL)
+		return 1;
+	if (head->_next->_next == NULL)
+	{
+		if (head->_date == head->_next->_date)
+			return 1;
+		else
+			return 0;
+	}
+	//寻找中间节点
 	PlistNode* n1 = head;
 	PlistNode* n2 = head;
-	while (n2->_next != NULL && n2 != NULL)
+	while (n2 != NULL && n2->_next != NULL)
 	{
 		n1 = n1->_next;
 		n2 = n2->_next;
@@ -296,6 +314,7 @@ int ChkPalindrome(PlistNode* head)
 	}
 	n2 = head;
 
+	//逆置后半部分链表
 	PlistNode* a1 = n1;
 	PlistNode* a2 = a1->_next;
 	PlistNode* a3 = a2->_next;
@@ -310,6 +329,8 @@ int ChkPalindrome(PlistNode* head)
 	}
 	n1 = a1;
 	a1 = a2 = a3 = NULL;
+
+	//进行比对
 	while (n1 != NULL&&n2 != NULL)
 	{
 		if (n1->_date != n2->_date)
@@ -319,8 +340,17 @@ int ChkPalindrome(PlistNode* head)
 	}
 	return 1;
 }
+/*
+函数功能：判断链表是否为回文结构
+入口参数：某链表的头的地址
+返回值：1或0
+*/
 int ChkPalindrome1(PlistNode* head)
 {
+	if (head == NULL)
+	{
+		return 1;
+	}
 	PlistNode* n1 = head;
 	PlistNode* n2 = head;
 	int arr[900];
@@ -340,53 +370,146 @@ int ChkPalindrome1(PlistNode* head)
 	}
 	return 1;
 }
+/*
+函数功能：将两个有序的链表在原地合并
+入口参数：链表1头的地址、链表2头的地址
+返回值：合并后链表的新头
+*/
 PlistNode* mergeTwoLists(PlistNode** l1, PlistNode** l2)
 {
-	if (*l1 == NULL&&*l2 != NULL)
+	if (*l1 == NULL)
 		return *l2;
-	if (*l1 != NULL&&*l2 == NULL)
+	else if (*l2 == NULL)
 		return *l1;
-	if (*l1 == NULL&&*l2 == NULL)
-		return NULL;
 	PlistNode* n1 = *l1;
 	PlistNode* n2 = *l2;
 	PlistNode* n3 = NULL;
 	PlistNode* cur = NULL;
 	PlistNode* head = NULL;
+
+	//处理头
 	if (n1->_date >= n2->_date)
 	{
-		PlistNode* cur = (PlistNode*)malloc(sizeof(PlistNode));
-		cur->_date = n2->_date;
-		cur->_next = n1;
-		n2 = n2->_next;
-		n1 = cur;
-		n3 = n1;
-		n1 = n1->_next;
+		cur = n2->_next; //记录n2的下一步走向
+
+		n3 = n2;
+		n2->_next = n1;//双指针构成
+
+		n2 = cur;//n2向前移动
 	}
 	else
 	{
 		n3 = n1;
-		n1 = n1->_next;
+		n1 = n1->_next;  //构成双指针
 	}
-	head = n3;
+	head = n3;//新头以保存
+
+	//双指针法进行新构建
 	while ((n1 != NULL) && (n2 != NULL))
 	{
 		if ((n2->_date >= n3->_date) && (n2->_date <= n1->_date))
 		{
-			cur = n2->_next;
+			cur = n2->_next;//保存n2的下一个链
+
 			n3->_next = n2;
 			n2->_next = n1;
-			n2 = cur;
-			n3 = n3->_next;
+			n3 = n3->_next;  //双指针向前移动
+
+			n2 = cur;//n2向前移动
 		}
 		else{
 			n3 = n1;
-			n1 = n1->_next;
+			n1 = n1->_next;  //双指针向前移动
 		}
 	}
+
+	//排除特殊情况
 	if (n2 != NULL)
 	{
-		n3->_next = n2;
+		n3->_next = n2;//直接尾插即可
 	}
 	return head;
+}
+/*
+函数功能：将链表中重复元素删除
+入口参数：链表得头
+返回值：操作后得链表新头
+*/
+PlistNode* deleteDuplication(PlistNode* pHead)
+{
+	if (pHead == NULL)
+		return NULL;
+	PlistNode* n2 = pHead;
+	PlistNode* n1 = pHead->_next;
+	PlistNode* newhead = NULL;
+	PlistNode* cur = NULL;
+	PlistNode* tmp = NULL;
+	newhead = tmp;
+	int num = 1;
+	int k = (pHead->_date) - 1;
+	if (n1 == NULL)
+	{
+		return pHead;
+	}
+	else if (n1->_next == NULL)
+	{
+		if (n1->_date != n2->_date)
+			return pHead;
+		else
+			return NULL;
+	}
+	while (n1&&n1->_next)
+	{
+		if (n1->_date == n2->_date)
+		{
+			k = n1->_date;
+			n2 = n1->_next;
+			n1 = n2->_next;
+		}
+		else if (n2->_date == k)
+		{
+			n2 = n1;
+			n1 = n1->_next;
+		}
+		else
+		{
+			if (num)
+			{
+				cur = (PlistNode*)malloc(sizeof(PlistNode));
+				cur->_date = n2->_date;
+				cur->_next = NULL;
+				tmp = cur;
+				newhead = cur;
+				n2 = n1;
+				n1 = n1->_next;
+				num--;
+			}
+			else{
+				cur = (PlistNode*)malloc(sizeof(PlistNode));
+				cur->_date = n2->_date;
+				cur->_next = NULL;
+				tmp->_next = cur;
+				tmp = cur;
+				n2 = n1;
+				n1 = n1->_next;
+			}
+		}
+	}
+	if (n2 != NULL&&n1 != NULL)
+	{
+		if (n2->_date != n1->_date&&n2->_date != k)
+		{
+			tmp->_next = n2;
+		}
+		else if (n2->_date != n1->_date&&n2->_date == k)
+		{
+			tmp->_next = n1;
+		}
+	}
+	else if (n1 == NULL&&n2 != NULL)
+	{
+		if (n2->_date != k)
+			tmp->_next = n2;
+	}
+	return newhead;
 }
