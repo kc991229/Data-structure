@@ -9,7 +9,11 @@ void InsertSort(int *a, int count);
 void ShellSort(int *a, int count);
 void SelectSort(int* a, int n);
 void BubbleSort(int* a, int n);
-void quicksort(int *a, int begin, int end);
+int getmidIndex(int* a, int left, int right);
+int quick_part(int *a, int begin, int end);
+int quick_part2(int *a, int begin, int end);
+void quicksort(int *a, int left, int right);
+
 
 #endif
 

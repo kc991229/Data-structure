@@ -16,7 +16,7 @@ void Swap(int *a, int *b)
 	*b = i;
 }
 void InsertSort(int *a, int count)
-{	
+{
 	for (size_t i = 0; i<count - 1; i++)
 	{
 		int end = i;
@@ -107,21 +107,87 @@ void BubbleSort(int* a, int n)
 		}
 	}
 }
-void quicksort(int *a, int begin, int end)
+int getmidIndex(int* a, int left, int right)
 {
-	int key = begin;//以最后为key
+	int mid = left + ((right - left) >> 1);
+	if (a[left] > a[mid])
+	{
+		if (a[mid] > a[right])
+			return mid;
+		else if (a[left] < a[right])
+			return left;
+		else
+			return right;
+	}
+	else//a[left]<a[mid]
+	{
+		if (a[mid] < a[right])
+			return mid;
+		else if (a[left]>a[right])
+			return left;
+		else
+			return right;
+	}
+}
+int quick_part2(int *a, int begin, int end)
+{
+	int mid = getmidIndex(a, begin, end);
+	Swap(&a[mid], &a[begin]);
+	int key = a[begin];
 	while (begin < end)
-	{		
-		while (begin < end && a[end] >= a[key])
+	{
+		while (begin<end && a[end] >= key)
 		{
 			end--;
 		}
-		while (begin < end && a[begin] <= a[key])
+		a[begin] = a[end];
+		while (begin < end && a[begin] <= key)
+		{
+			begin++;
+		}
+		a[end] = a[begin];
+	}
+	a[begin] = key;
+	return begin;
+}
+int quick_part(int *a, int begin, int end)
+{
+	int mid = getmidIndex(a, begin, end);
+	Swap(&a[mid], &a[begin]);
+	int key = begin;//以begin为key
+	while (begin < end)  //以二者相遇为界
+	{
+		while (begin < end && a[end] >= a[key])  //end先走，寻找小于key的
+		{
+			end--;
+		}
+		while (begin < end && a[begin] <= a[key])//begin再走找大于key的
 		{
 			begin++;
 		}
 
-		Swap(&a[begin], &a[end]);
+		Swap(&a[begin], &a[end]);  //进行交换
 	}
-	Swap(&a[begin], &a[key]);
+	Swap(&a[begin], &a[key]);//当begin、end相遇，此时的位置就是key应该在的位置
+	return begin;//返回该趟的下标，以便于接下来的操作
+}
+void quicksort(int *a, int left, int right)
+{
+	if (left >= right)
+	{
+		return;
+	}
+	if (right - left + 1 < 10)
+	{
+		InsertSort(a + left, right - left + 1);
+	}
+	else
+	{
+		int keyIndex = quick_part2(a, left, right);
+		quicksort(a, left, keyIndex - 1);
+		quicksort(a, keyIndex + 1, right);
+	}
+
+
+
 }
