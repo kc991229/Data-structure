@@ -129,6 +129,30 @@ int getmidIndex(int* a, int left, int right)
 			return right;
 	}
 }
+int quick_part3(int *a, int begin, int end)
+{
+	int midIndex = getmidIndex(a, begin, end);
+	Swap(&a[midIndex], &a[begin]);
+	int key = a[begin];
+	int cur = begin;
+	int prev = cur - 1;
+	while (cur <= end)
+	{
+		while (cur <= end && a[cur] >= key)
+		{
+			cur++;
+		}
+		if (cur > end)
+			break;
+		else
+		{
+			prev++;
+			Swap(&a[prev], &a[cur]);
+		}
+	}
+	return prev;
+}
+
 int quick_part2(int *a, int begin, int end)
 {
 	int mid = getmidIndex(a, begin, end);
@@ -183,7 +207,7 @@ void quicksort(int *a, int left, int right)
 	}
 	else
 	{
-		int keyIndex = quick_part2(a, left, right);
+		int keyIndex = quick_part3(a, left, right);
 		quicksort(a, left, keyIndex - 1);
 		quicksort(a, keyIndex + 1, right);
 	}

@@ -12,6 +12,7 @@ void BubbleSort(int* a, int n);
 int getmidIndex(int* a, int left, int right);
 int quick_part(int *a, int begin, int end);
 int quick_part2(int *a, int begin, int end);
+int quick_part3(int *a, int begin, int end);
 void quicksort(int *a, int left, int right);
 
 
