@@ -215,3 +215,38 @@ void quicksort(int *a, int left, int right)
 
 
 }
+
+//非比较排序
+void CountSort(int* a, int n)
+{
+	// 1、计算出统计次数的数组的大小
+	int max = a[0];
+	int min = a[0];
+	for (int i = 0; i < n; ++i)
+	{
+		if (a[i] > max)
+			max = a[i];
+
+		if (a[i] < min)
+			min = a[i];
+	}
+
+	int range = max - min + 1;
+	int* countA = (int*)malloc(sizeof(int)*range);
+	int num = 0;
+	memset(countA, 0, sizeof(int)*range);//初始化为0
+	// 1、统计数据出现的次数
+	for (int j = 0; j < n; j++)
+	{
+		countA[a[j] - min]++;
+	}
+
+	// 2、根据次数排序，写回原数组
+	for (int j = 0; j < range; j++)
+	{
+		while (countA[j]--)
+		{
+			a[num++] = j + min;
+		}
+	}
+}
